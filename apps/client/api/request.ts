@@ -8,8 +8,7 @@ export const testFetch = (name: string, price: string) => {
       name,
       price,
     }),
-  })
-    .then((response) => {
-      console.log(response);
-    });
+  }).then((response) => {
+    console.log(response);
+  });
 };
