@@ -1,9 +1,15 @@
-import { SyntheticEvent, useState } from "react";
-import { testFetch } from "../api/request";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { getItems, postNewItem } from "../api/requests";
 
 const Admin = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const result = getItems();
+    console.log(result);
+  }, []);
 
   const handleChangeName = (event: SyntheticEvent) => {
     const target = event.target as HTMLInputElement;
@@ -17,7 +23,7 @@ const Admin = () => {
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
-    testFetch(name, price);
+    postNewItem(name, price);
   };
 
   return (
@@ -40,6 +46,7 @@ const Admin = () => {
         <br />
         <button type="submit">Add</button>
       </form>
+      <h3>All items</h3>
     </div>
   );
 };
