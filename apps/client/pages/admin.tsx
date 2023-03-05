@@ -1,14 +1,20 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { getItems, postNewItem } from "../api/requests";
+import { AccessoriesList } from "../components/admin/AccessoriesList";
+import { IAccessory } from "../types/types";
 
 const Admin = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Array<IAccessory>>([]);
+
+  const getAccessories = async () => {
+    const res = await getItems();
+    setItems(res);
+  };
 
   useEffect(() => {
-    const result = getItems();
-    console.log(result);
+    getAccessories();
   }, []);
 
   const handleChangeName = (event: SyntheticEvent) => {
@@ -46,7 +52,7 @@ const Admin = () => {
         <br />
         <button type="submit">Add</button>
       </form>
-      <h3>All items</h3>
+      <AccessoriesList items={items} />
     </div>
   );
 };

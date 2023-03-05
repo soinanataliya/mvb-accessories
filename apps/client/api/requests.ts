@@ -1,12 +1,15 @@
-export const getItems = () => {
-  fetch("http://localhost:3001/accessories", {
+import { IAccessory } from "../types/types";
+
+const ACCESSORIES = "api/accessories";
+
+export const getItems = (): Promise<Array<IAccessory>> => {
+  return fetch(ACCESSORIES, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   }).then((response) => {
     if (response.ok) {
-      debugger
       return response.json();
     } else {
       alert("Ошибка: " + response.status);
@@ -15,7 +18,7 @@ export const getItems = () => {
 };
 
 export const postNewItem = (name: string, price: string) => {
-  fetch("http://localhost:3001/accessories", {
+  fetch(ACCESSORIES, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,6 +26,20 @@ export const postNewItem = (name: string, price: string) => {
     body: JSON.stringify({
       name,
       price,
+    }),
+  }).then((response) => {
+    console.log(response);
+  });
+};
+
+export const deleteItem = (id: string) => {
+  fetch(ACCESSORIES, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
     }),
   }).then((response) => {
     console.log(response);

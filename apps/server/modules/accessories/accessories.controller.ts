@@ -1,21 +1,21 @@
 import { FastifyInstance, RouteGenericInterface } from "fastify";
-import { Knex } from 'knex';
+import { Knex } from "knex";
 
-const ACCESSORIES = '/accessories'
+const ACCESSORIES = "/accessories";
 
 interface AccessoryDelete extends RouteGenericInterface {
-    Body: { id: string }
+  Body: { id: string };
 }
 
-export function useAccessoriesController (server: FastifyInstance, dbConnection: Knex) {
-	server.get(ACCESSORIES, async (req, res) => {
-		return dbConnection('acc').select();
-    });
-    server.delete<AccessoryDelete>(ACCESSORIES, async (req, res) => {
-        const { id } = req.body;
-        dbConnection('acc').del().where({
-            id,
-          });
-        return `id ${id} удален`;
-    });
+export function useAccessoriesController(
+  server: FastifyInstance,
+  dbConnection: Knex
+) {
+  server.get(ACCESSORIES, async (req, res) => {
+    return dbConnection("acc").select();
+  });
+  server.delete<AccessoryDelete>(ACCESSORIES, async (req, res) => {
+    const { id } = req.body;
+    return dbConnection("acc").where("id", id).del("id");
+  });
 }
