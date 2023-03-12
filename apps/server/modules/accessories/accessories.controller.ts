@@ -1,10 +1,14 @@
 import { FastifyInstance, RouteGenericInterface } from "fastify";
 import { Knex } from "knex";
+import AccessoriesRepository from "./acessories.repository.js";
 
 const ACCESSORIES = "/accessories";
 
 interface AccessoryDelete extends RouteGenericInterface {
   Body: { id: string };
+}
+interface AccessoryPost extends RouteGenericInterface {
+  Body: { name: string; price: string };
 }
 
 export function useAccessoriesController(
@@ -17,5 +21,11 @@ export function useAccessoriesController(
   server.delete<AccessoryDelete>(ACCESSORIES, async (req, res) => {
     const { id } = req.body;
     return dbConnection("acc").where("id", id).del("id");
+  });
+  server.post<AccessoryPost>(ACCESSORIES, async (req, res) => {
+    const { name, price } = req.body;
+    const generatedData = AccessoriesRepository.createAccessory(name, price);
+    return dbConnection("acc")
+      .insert(generatedData);
   });
 }
