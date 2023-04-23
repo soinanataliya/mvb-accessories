@@ -1,6 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { getItems, postNewItem } from "../api/requests";
 import { AccessoriesList } from "../components/admin/AccessoriesList";
+import { Login } from "../components/admin/Login";
 import { IAccessory } from "../types/types";
 
 const Admin = () => {
@@ -35,6 +36,7 @@ const Admin = () => {
   return (
     <div>
       <h1>Client!</h1>
+      <Login />
       <form onSubmit={handleSubmit}>
         <label>
           Name:

@@ -1,6 +1,7 @@
 import { IAccessory } from "../types/types";
 
 const ACCESSORIES = "api/accessories";
+const LOGIN = "api/login";
 
 export const getItems = (): Promise<Array<IAccessory>> => {
   return fetch(ACCESSORIES, {
@@ -40,6 +41,27 @@ export const deleteItem = (id: string) => {
     },
     body: JSON.stringify({
       id,
+    }),
+  }).then((response) => {
+    console.log(response);
+  });
+};
+
+export const loginRequest = ({
+  login,
+  password,
+}: {
+  login: string;
+  password: string;
+}) => {
+  fetch(LOGIN, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      login,
+      password,
     }),
   }).then((response) => {
     console.log(response);

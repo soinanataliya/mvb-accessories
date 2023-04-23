@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-import { IAccessory } from "./types.js";
 
 export class Accessory {
   id: string;
