@@ -19,10 +19,16 @@ export function useAccessoriesController(
   server.get(ACCESSORIES, async (req, res) => {
     return dbConnection("acc").select();
   });
-  server.delete<AccessoryDelete>(ACCESSORIES, async (req, res) => {
-    const { id } = req.body;
-    return dbConnection("acc").where("id", id).del("id");
-  });
+  server.delete<AccessoryDelete>(
+    ACCESSORIES,
+    {
+      preHandler: [authGuard],
+    },
+    async (req, res) => {
+      const { id } = req.body;
+      return dbConnection("acc").where("id", id).del("id");
+    }
+  );
   server.post<AccessoryPost>(
     ACCESSORIES,
     {

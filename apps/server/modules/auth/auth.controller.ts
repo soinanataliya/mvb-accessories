@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 const ERROR = "Auth error";
 export const JWT_SECRET = "secret";
+const cookieName = "session";
 
 const MOCK_USERS: Array<{
   login: string;
@@ -31,9 +32,9 @@ export function useAuthController(server: FastifyInstance) {
     assert(!!user, Error(ERROR));
     assert(user.passwordHash === encodePassword(password), Error(ERROR));
     const token = jwt.sign({ login: user.login }, JWT_SECRET, {
-      expiresIn: "3s",
+      expiresIn: "1d",
     });
-    res.setCookie("session", token, {
+    res.setCookie(cookieName, token, {
       sameSite: "strict",
       httpOnly: true,
       secure: true,
@@ -41,6 +42,6 @@ export function useAuthController(server: FastifyInstance) {
   });
 
   server.post("/logout", async (req, res) => {
-    return;
+    res.clearCookie(cookieName, { path: "/api" });
   });
 }

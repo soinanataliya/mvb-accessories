@@ -10,7 +10,7 @@ const AccessoriesList: FC<IProps> = ({ items }) => {
   return (
     <>
       <h3>All items</h3>
-      {items.map((item) => {
+      {items?.map((item) => {
         return <Accessory key={item.id} item={item} />;
       })}
     </>

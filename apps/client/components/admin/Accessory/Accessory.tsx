@@ -1,6 +1,7 @@
 import { memo, FC } from "react";
 import { deleteItem } from "../../../api/requests";
 import { IAccessory } from "../../../types/types";
+import styles from "./Accessory.module.css";
 
 interface IProps {
   item: IAccessory;
@@ -12,11 +13,11 @@ const Accessory: FC<IProps> = ({ item }) => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ color: "grey" }}>{item.id}</div>
+    <div className={styles.accessoryWrapper}>
+      <div>id: {item.id}</div>
       <div>Name: {item.name}</div>
-      <div style={{ color: "blue" }}>{item.price}</div>
-      <div style={{ color: "red" }}>{item.src}</div>
+      <div>Price: {item.price}</div>
+      <div>Src: {item.src}</div>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );

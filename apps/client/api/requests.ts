@@ -2,6 +2,7 @@ import { IAccessory } from "../types/types";
 
 const ACCESSORIES = "api/accessories";
 const LOGIN = "api/login";
+const LOGOUT = "api/logout";
 
 export const getItems = (): Promise<Array<IAccessory>> => {
   return fetch(ACCESSORIES, {
@@ -63,6 +64,14 @@ export const loginRequest = ({
       login,
       password,
     }),
+  }).then((response) => {
+    console.log(response);
+  });
+};
+
+export const logoutRequest = () => {
+  fetch(LOGOUT, {
+    method: "POST",
   }).then((response) => {
     console.log(response);
   });

@@ -1,0 +1,15 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0;
+    border: 2px blue solid;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: antiquewhite;
+}
+.formBlock {
+    display: flex;
+    max-width: 250px;
+    justify-content: space-between;
+    padding-bottom: 12px;
+}

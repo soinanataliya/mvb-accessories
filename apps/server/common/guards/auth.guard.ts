@@ -9,7 +9,6 @@ export const authGuard = (
   done: HookHandlerDoneFunction,
 ) => {
   const token = req.cookies.session;
-  console.log('@@@@@', token);
   assert(token, Error("Forbidden"));
   try {
     const decodedSession = jwt.verify(token, JWT_SECRET);
