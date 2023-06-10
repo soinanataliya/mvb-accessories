@@ -3,6 +3,7 @@ import { IAccessory } from "../types/types";
 const ACCESSORIES = "api/accessories";
 const LOGIN = "api/login";
 const LOGOUT = "api/logout";
+const USER = "api/user";
 
 export const getItems = (): Promise<Array<IAccessory>> => {
   return fetch(ACCESSORIES, {
@@ -54,8 +55,8 @@ export const loginRequest = ({
 }: {
   login: string;
   password: string;
-}) => {
-  fetch(LOGIN, {
+}): Promise<Response> => {
+  return fetch(LOGIN, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -64,15 +65,26 @@ export const loginRequest = ({
       login,
       password,
     }),
-  }).then((response) => {
-    console.log(response);
   });
 };
 
-export const logoutRequest = () => {
-  fetch(LOGOUT, {
+export const logoutRequest = (): Promise<Response> => {
+  return fetch(LOGOUT, {
     method: "POST",
+  });
+};
+
+export const getUser = (): Promise<{ user: string }> => {
+  return fetch(USER, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((response) => {
-    console.log(response);
+    if (response.ok) {
+      return response.json();
+    } else {
+      console.warn("Ошибка: " + response.status);
+    }
   });
 };

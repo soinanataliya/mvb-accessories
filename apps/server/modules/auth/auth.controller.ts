@@ -1,6 +1,7 @@
 import assert from "node:assert";
 import { FastifyInstance, RouteGenericInterface } from "fastify";
 import jwt from "jsonwebtoken";
+import { authGuard } from "../../common/guards/auth.guard.js"
 
 const ERROR = "Auth error";
 export const JWT_SECRET = "secret";
@@ -39,9 +40,22 @@ export function useAuthController(server: FastifyInstance) {
       httpOnly: true,
       secure: true,
     });
+    return { user: login } 
   });
 
   server.post("/logout", async (req, res) => {
     res.clearCookie(cookieName, { path: "/api" });
   });
+
+  server.get(
+    "/user",
+    {
+      preHandler: [authGuard],
+    },
+    async (req, res) => {
+      return {
+        user: 'admin'
+      }
+    }
+  );
 }

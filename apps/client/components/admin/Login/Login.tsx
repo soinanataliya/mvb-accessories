@@ -2,12 +2,20 @@ import { memo, FC, useState, SyntheticEvent } from "react";
 import { loginRequest } from "../../../api/requests";
 import styles from "./Login.module.css";
 
-const Login: FC = () => {
+interface IProps {
+  onLogin: (login: string) => void;
+}
+
+const Login: FC<IProps> = ({ onLogin }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
-    await loginRequest({ login, password });
+    const response = await loginRequest({ login, password });
+    if (response.status === 200) {
+      const userInfo = await response.json();
+      onLogin(userInfo.user);
+    }
   };
 
   const handleChangeLogin = (event: SyntheticEvent) => {
