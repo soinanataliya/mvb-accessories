@@ -23,6 +23,7 @@ importers:
       next: 13.0.0
       react: 18.2.0
       react-dom: 18.2.0
+      react-error-boundary: ^4.0.10
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
@@ -30,6 +31,7 @@ importers:
       next: 13.0.0_pjwopsidmaokadturxaafygjp4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-error-boundary: 4.0.10_react@18.2.0
       ui: link:../../packages/ui
     devDependencies:
       '@babel/core': 7.20.12
@@ -2919,6 +2921,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-error-boundary/4.0.10_react@18.2.0:
+    resolution: {integrity: sha512-pvVKdi77j2OoPHo+p3rorgE43OjDWiqFkaqkJz8sJKK6uf/u8xtzuaVfj5qJ2JnDLIgF1De3zY5AJDijp+LVPA==}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.20.7
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
