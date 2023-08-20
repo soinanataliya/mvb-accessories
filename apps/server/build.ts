@@ -7,7 +7,10 @@ import { useAuthController } from "./modules/auth/auth.controller.js";
 
 export default function build(opts: any) {
   const server = fastify<Server, IncomingMessage, ServerResponse>(opts);
-  server.register(import('@fastify/cookie'))
+  server.register(import('@fastify/cookie'));
+
+  server.register(import('@fastify/multipart') );
+  
   useAccessoriesController(server, dbConnection);
   useAuthController(server);
   return server;
