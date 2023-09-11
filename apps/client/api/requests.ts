@@ -23,9 +23,6 @@ export const getItems = (): Promise<Array<IAccessory>> => {
 export const postNewItem = (formData: FormData) => {
   fetch(ACCESSORIES, {
     method: "POST",
-    // headers: {
-    //   'Content-Type': 'multipart/form-data',
-    // },
     body: formData,
   }).then((response) => {
     console.log(response);

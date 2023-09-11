@@ -5,7 +5,7 @@ import styles from "./AddAccessory.module.css";
 const AddAccessory = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
 
   const handleChangeName = (event: SyntheticEvent) => {
     const target = event.target as HTMLInputElement;
@@ -33,6 +33,7 @@ const AddAccessory = () => {
     if (!!file) {
       const f = new Blob([file]);
       await formData.append("file", f);
+      await formData.append("fileType", file.type);
     }
 
     await postNewItem(formData);
