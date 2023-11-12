@@ -11,10 +11,11 @@ const ACCESSORIES = "/accessories";
 
 const fileTypeMapper = {
   "image/png": "png",
+  "image/jpeg": "jpeg",
 };
 
 const escapeString = (input: string): string => {
-  return he.encode(input);
+  return he.escape(input);
 };
 
 interface AccessoryDelete extends RouteGenericInterface {
@@ -32,8 +33,13 @@ export function useAccessoriesController(
   server: FastifyInstance,
   dbConnection: Knex
 ) {
-  server.get(ACCESSORIES, async (req, res) => {
-    return dbConnection("acc").select();
+  server.get(ACCESSORIES, async (request, reply) => {
+    try {
+      const data = dbConnection("acc").select();
+      return data;
+    } catch {
+      reply.code(500).send({ error: "Error in getting data" });
+    }
   });
 
   server.delete<AccessoryDelete>(
@@ -41,9 +47,13 @@ export function useAccessoriesController(
     {
       preHandler: [authGuard],
     },
-    async (req, res) => {
-      const { id } = req.body;
-      return dbConnection("acc").where("id", id).del("id");
+    async (request, reply) => {
+      try {
+        const { id } = request.body;
+        return dbConnection("acc").where("id", id).del("id");
+      } catch {
+        reply.code(500).send({ error: "Error in deleting data" });
+      }
     }
   );
 
@@ -82,15 +92,14 @@ export function useAccessoriesController(
         );
 
         await pump(
-            file.file,
-            fs.createWriteStream(
-              `./uploads/${generatedData.id}${fileType && "."}${
-                  // @ts-ignore
-                fileTypeMapper[fileType.value]
-              }`
-            ) // TODO
-          );
-        // TODO file link
+          file.file,
+          fs.createWriteStream(
+            `./uploads/${generatedData.id}${fileType && "."}${
+              // @ts-ignore
+              fileTypeMapper[fileType.value]
+            }`
+          )
+        );
         return dbConnection("acc").insert(generatedData);
 
         // return { message: "Files and fields uploaded successfully" };
