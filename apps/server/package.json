@@ -11,9 +11,11 @@
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
     "@fastify/multipart": "^7.7.3",
+    "@types/he": "1.2.2",
     "@types/node": "18.14.2",
     "@types/uuid": "latest",
     "fastify": "4.13.0",
+    "he": "1.2.0",
     "jsonwebtoken": "9.0.0",
     "knex": "0.95.14",
     "prettier": "2.3.2",

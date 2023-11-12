@@ -47,10 +47,12 @@ importers:
     specifiers:
       '@fastify/cookie': ^8.3.0
       '@fastify/multipart': ^7.7.3
+      '@types/he': ^1.2.2
       '@types/jsonwebtoken': 9.0.1
       '@types/node': 18.14.2
       '@types/uuid': latest
       fastify: 4.13.0
+      he: ^1.2.0
       jsonwebtoken: 9.0.0
       knex: 0.95.14
       prettier: 2.3.2
@@ -62,9 +64,11 @@ importers:
     dependencies:
       '@fastify/cookie': 8.3.0
       '@fastify/multipart': 7.7.3
+      '@types/he': 1.2.2
       '@types/node': 18.14.2
-      '@types/uuid': 9.0.2
+      '@types/uuid': 9.0.6
       fastify: 4.13.0
+      he: 1.2.0
       jsonwebtoken: 9.0.0
       knex: 0.95.14_sqlite3@5.1.4
       prettier: 2.3.2
@@ -718,6 +722,10 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: false
 
+  /@types/he/1.2.2:
+    resolution: {integrity: sha512-v2gT1gRK65k9nz8SVSXo3lh7AHnRPL3mRcYNhhsqL/L2S1xt/MGyEI5a7vJPXWik/IxTtAktXf8/HlCxDR1nsw==}
+    dev: false
+
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
@@ -757,8 +765,8 @@ packages:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
 
-  /@types/uuid/9.0.2:
-    resolution: {integrity: sha512-kNnC1GFBLuhImSnV7w4njQkUiJi0ZXUycu1rUaouPqiKlXkh77JKgdRnTAp1x5eBwcIwbtI+3otwzuIDEuDoxQ==}
+  /@types/uuid/9.0.6:
+    resolution: {integrity: sha512-BT2Krtx4xaO6iwzwMFUYvWBWkV2pr37zD68Vmp1CDV196MzczBRxuEpD6Pr395HAgebC/co7hOphs53r8V7jew==}
     dev: false
 
   /@typescript-eslint/parser/5.48.0_yfqovispp7u7jaktymfaqwl2py:
@@ -2128,6 +2136,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: false
+
+  /he/1.2.0:
+    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
     dev: false
 
   /http-cache-semantics/4.1.1:
