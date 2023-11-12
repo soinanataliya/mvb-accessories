@@ -100,9 +100,9 @@ export function useAccessoriesController(
             }`
           )
         );
-        return dbConnection("acc").insert(generatedData);
 
-        // return { message: "Files and fields uploaded successfully" };
+        await dbConnection("acc").insert(generatedData);
+        return { message: "Files and fields uploaded successfully" };
       } catch (error) {
         reply.code(500).send({ error: "An error occurred" });
       }
