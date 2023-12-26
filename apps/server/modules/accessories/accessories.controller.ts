@@ -8,8 +8,9 @@ import util from "util";
 import he from "he";
 
 const ACCESSORIES = "/accessories";
+const FILE = "/file/:filename";
 
-const fileTypeMapper = {
+const fileTypeMapper: Record<string, string | undefined> = {
   "image/png": "png",
   "image/jpeg": "jpeg",
 };
@@ -42,7 +43,7 @@ export function useAccessoriesController(
     }
   });
 
-  server.delete<AccessoryDelete>(
+  server.delete<AccessoryDelete>( // TODO delete files from folder
     ACCESSORIES,
     {
       preHandler: [authGuard],
@@ -88,14 +89,14 @@ export function useAccessoriesController(
 
         const generatedData = AccessoriesRepository.createAccessory(
           checkedName,
-          checkedPrice
+          checkedPrice,
+          fileTypeMapper[fileType.value] ?? ""
         );
 
         await pump(
           file.file,
           fs.createWriteStream(
             `./uploads/${generatedData.id}${fileType && "."}${
-              // @ts-ignore
               fileTypeMapper[fileType.value]
             }`
           )
@@ -108,4 +109,17 @@ export function useAccessoriesController(
       }
     }
   );
+
+  server.get(FILE, async (request, reply) => {
+    try {
+      // @ts-ignore
+      const { filename } = request.params;
+      const fileUrl = `/uploads/${filename}`;
+
+      return { fileUrl };
+    } catch (error) {
+      console.error(error);
+      reply.code(500).send("Internal Server Error");
+    }
+  });
 }

@@ -25,13 +25,13 @@ export class Accessory {
 }
 
 export default class AccessoriesRepository {
-  static createAccessory(name: string, price: string) {
+  static createAccessory(name: string, price: string, ext: string) {
     const id = uuidv4();
     const newAccessory = new Accessory({
       id,
       name,
       price,
-      src: id
+      src: `${id}.${ext}`,
     });
     return newAccessory;
   }
