@@ -51,6 +51,9 @@ export function useAccessoriesController(
     async (request, reply) => {
       try {
         const { id } = request.body;
+        const result = await dbConnection("acc").select().where("id", id);
+        const fileName = result[0].src;
+        fileName && fs.unlinkSync(`./uploads/${fileName}`);
         return dbConnection("acc").where("id", id).del("id");
       } catch {
         reply.code(500).send({ error: "Error in deleting data" });
