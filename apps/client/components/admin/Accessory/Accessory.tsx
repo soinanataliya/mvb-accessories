@@ -8,16 +8,26 @@ interface IProps {
 }
 
 const Accessory: FC<IProps> = ({ item }) => {
+  const { id, name, price, src } = item;
   const handleDelete = () => {
     deleteItem(item.id);
   };
 
   return (
     <div className={styles.accessoryWrapper}>
-      <div>id: {item.id}</div>
-      <div>Name: {item.name}</div>
-      <div>Price: {item.price}</div>
-      <div>Src: {item.src}</div>
+      <div>id: {id}</div>
+      <div>Name: {name}</div>
+      <div>Price: {price}</div>
+      <div>Src: {src}</div>
+      <div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`http://localhost:3001/uploads/${src}`}
+          alt="Accessory image"
+          width={100}
+          height={100}
+        />
+      </div>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );
