@@ -12,7 +12,8 @@ const Login: FC<IProps> = ({ onLogin }) => {
   const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
     const response = await loginRequest({ login, password });
-    if (response.status === 200) {
+
+    if (response?.status === 200) {
       const userInfo = await response.json();
       onLogin(userInfo.user);
     }

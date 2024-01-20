@@ -4,6 +4,7 @@ import { AccessoriesList } from "../components/admin/AccessoriesList";
 import { AddAccessory } from "../components/admin/AddAccessory";
 import { User } from "../components/admin/User";
 import { IAccessory } from "../types/types";
+import { PageLayout } from "../components/shared/PageLayout";
 
 const Admin = () => {
   const [items, setItems] = useState<Array<IAccessory>>([]);
@@ -31,19 +32,19 @@ const Admin = () => {
   };
   const handleLogOut = () => {
     logoutRequest().then((response) => {
-      if (response.status === 200) {
+      if (response?.status === 200) {
         setCurrentUser(null);
       }
     });
   };
 
   return (
-    <div>
+    <PageLayout>
       <h1>Admin panel</h1>
       <User user={currentUser} onLogin={handleLogIn} onLogout={handleLogOut} />
       <AddAccessory />
       <AccessoriesList items={items} />
-    </div>
+    </PageLayout>
   );
 };
 

@@ -1,4 +1,5 @@
 import { IAccessory } from "../types/types";
+import { showError, showSuccess } from "./helpers";
 
 const ACCESSORIES = "api/accessories";
 const LOGIN = "api/login";
@@ -15,7 +16,7 @@ export const getItems = (): Promise<Array<IAccessory>> => {
     if (response.ok) {
       return response.json();
     } else {
-      alert("Ошибка: " + response.status);
+      showError('Cannot get items');
     }
   });
 };
@@ -24,9 +25,11 @@ export const postNewItem = (formData: FormData) => {
   fetch(ACCESSORIES, {
     method: "POST",
     body: formData,
-  }).then((response) => {
-    console.log(response);
-  });
+  }).then(() => {
+    showSuccess();
+  }).catch(() => {
+    showError();
+  })
 };
 
 export const deleteItem = (id: string) => {
@@ -38,8 +41,8 @@ export const deleteItem = (id: string) => {
     body: JSON.stringify({
       id,
     }),
-  }).then((response) => {
-    console.log(response);
+  }).then(() => {
+    showSuccess();
   });
 };
 
@@ -65,7 +68,7 @@ export const loginRequest = ({
 export const logoutRequest = (): Promise<Response> => {
   return fetch(LOGOUT, {
     method: "POST",
-  });
+  })
 };
 
 export const getUser = (): Promise<{ user: string }> => {
@@ -78,7 +81,7 @@ export const getUser = (): Promise<{ user: string }> => {
     if (response.ok) {
       return response.json();
     } else {
-      console.warn("Ошибка: " + response.status);
+      showError('Not logged in');
     }
   });
 };
