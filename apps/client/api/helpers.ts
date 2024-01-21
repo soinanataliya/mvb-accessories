@@ -4,6 +4,6 @@ export const showError = (message?: string) => {
     toast.error(message || "This didn't work.")
 }
 
-export const showSuccess = () => {
-    toast.success("Done!")
+export const showSuccess = (message?: string) => {
+    toast.success(message || "Done!")
 }

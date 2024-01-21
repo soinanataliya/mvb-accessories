@@ -22,8 +22,10 @@ const Admin = () => {
       return;
     }
     getUser().then((response) => {
-      response?.user && setCurrentUser(response.user);
-    });
+      if (response?.user) {
+        setCurrentUser(response.user);
+      }
+    })
     getAccessories();
   }, []);
 
