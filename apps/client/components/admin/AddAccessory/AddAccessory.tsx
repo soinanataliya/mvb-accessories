@@ -1,11 +1,21 @@
 import { memo, useState, SyntheticEvent, ChangeEvent } from "react";
 import { postNewItem } from "../../../api/requests";
 import styles from "./AddAccessory.module.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const AddAccessory = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [file, setFile] = useState<File | null>(null);
+
+  const client = useQueryClient();
+
+  const { mutate: create } = useMutation({
+    mutationFn: postNewItem,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['accessories']});
+    }
+  });
 
   const handleChangeName = (event: SyntheticEvent) => {
     const target = event.target as HTMLInputElement;
@@ -23,20 +33,20 @@ const AddAccessory = () => {
     setFile(file as any);
   };
 
-  const handleSubmit = async (event: SyntheticEvent) => {
+  const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
 
     const formData = new FormData();
 
-    await formData.append("name", name);
-    await formData.append("price", price);
+    formData.append("name", name);
+    formData.append("price", price);
     if (!!file) {
       const f = new Blob([file]);
-      await formData.append("file", f);
-      await formData.append("fileType", file.type);
+      formData.append("file", f);
+      formData.append("fileType", file.type);
     }
 
-    await postNewItem(formData);
+   void create(formData);
   };
 
   return (

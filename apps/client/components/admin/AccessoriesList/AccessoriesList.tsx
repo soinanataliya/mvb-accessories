@@ -1,16 +1,22 @@
-import { memo, FC } from "react";
-import { IAccessory } from "../../../types/types";
+import { memo } from "react";
 import { Accessory } from "../Accessory";
+import { useQuery } from "@tanstack/react-query";
+import { getItems } from "../../../api/requests";
 
-interface IProps {
-  items: Array<IAccessory>;
-}
+const AccessoriesList = () => {
+  const { data, isLoading, isSuccess } = useQuery({
+    queryFn: getItems,
+    queryKey: ['accessories'],
+  });
 
-const AccessoriesList: FC<IProps> = ({ items }) => {
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <>
       <h3>All items</h3>
-      {items?.map((item) => {
+      {isSuccess && data?.map((item) => {
         return <Accessory key={item.id} item={item} />;
       })}
     </>

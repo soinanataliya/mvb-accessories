@@ -2,6 +2,7 @@ import { memo, FC } from "react";
 import { deleteItem } from "../../../api/requests";
 import { IAccessory } from "../../../types/types";
 import styles from "./Accessory.module.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface IProps {
   item: IAccessory;
@@ -9,8 +10,18 @@ interface IProps {
 
 const Accessory: FC<IProps> = ({ item }) => {
   const { id, name, price, src } = item;
+
+  const client = useQueryClient();
+
+  const { mutate: create } = useMutation({
+    mutationFn: deleteItem,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["accessories"] });
+    },
+  });
+
   const handleDelete = () => {
-    deleteItem(item.id);
+    void create(item.id);
   };
 
   return (
