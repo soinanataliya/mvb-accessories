@@ -69,7 +69,7 @@ export const loginRequest = async ({
 }: {
   login: string;
   password: string;
-}): Promise<Response> => {
+}): Promise<unknown> => {
   try {
     const response = await fetch(LOGIN, {
       method: "POST",

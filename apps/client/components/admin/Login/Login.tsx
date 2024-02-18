@@ -1,6 +1,7 @@
 import { memo, FC, useState, SyntheticEvent } from "react";
 import { loginRequest } from "../../../api/requests";
 import styles from "./Login.module.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface IProps {
   onLogin: (login: string) => void;
@@ -9,14 +10,22 @@ interface IProps {
 const Login: FC<IProps> = ({ onLogin }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = async (event: SyntheticEvent) => {
-    event.preventDefault();
-    const response = await loginRequest({ login, password });
 
-    if (response?.status === 200) {
-      const userInfo = await response.json();
-      onLogin(userInfo.user);
+  const client = useQueryClient();
+
+  const { mutate: logIn } = useMutation({
+    mutationFn: loginRequest,
+    onSuccess: (response: any) => {
+      if (response?.user) {
+        onLogin(response?.user);
+        client.invalidateQueries({ queryKey: ['accessories']});
+      }
     }
+  });
+  
+  const handleLogin = (event: SyntheticEvent) => {
+    event.preventDefault();
+   void logIn({ login, password });
   };
 
   const handleChangeLogin = (event: SyntheticEvent) => {
