@@ -1,38 +1,32 @@
-import { v4 as uuidv4 } from "uuid";
+import { Knex } from "knex";
 
-export class Accessory {
+export interface Accessory {
   id: string;
   name?: string;
   price?: string;
   src?: string;
-
-  constructor({
-    id,
-    name,
-    price,
-    src,
-  }: {
-    id: string;
-    name?: string;
-    price?: string;
-    src?: string;
-  }) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.src = src;
-  }
 }
 
 export default class AccessoriesRepository {
-  static createAccessory(name: string, price: string, ext: string) {
-    const id = uuidv4();
-    const newAccessory = new Accessory({
-      id,
-      name,
-      price,
-      src: `${id}.${ext}`,
-    });
-    return newAccessory;
+  private dbConnection: Knex;
+
+  constructor(dbConnection: Knex) {
+    this.dbConnection = dbConnection
+  }
+
+  getAll() {
+    return this.dbConnection("acc").select();
+  }
+
+  getById(id: string) {
+    return this.dbConnection("acc").select().where("id", id);
+  }
+
+  deleteById(id: string) {
+    return this.dbConnection("acc").where("id", id).del("id");
+  }
+
+  addNew(data: Accessory) {
+    return this.dbConnection("acc").insert(data);
   }
 }

@@ -1,21 +1,13 @@
 import { authGuard } from "../../common/guards/auth.guard.js";
-import { Knex } from "knex";
-import AccessoriesRepository from "./acessories.repository.js";
-import fs from "fs";
 import { FastifyInstance, RouteGenericInterface } from "fastify";
-import { pipeline } from "stream";
-import util from "util";
 import he from "he";
+import AccessoriesService from "./acessories.service.js";
 
 const ACCESSORIES = "/accessories";
 const FILE = "/file/:filename";
 
-const fileTypeMapper: Record<string, string | undefined> = {
-  "image/png": "png",
-  "image/jpeg": "jpeg",
-};
-
 const escapeString = (input: string): string => {
+  // TODO перенести в отдельный модуль
   return he.escape(input);
 };
 
@@ -26,42 +18,38 @@ interface AccessoryPost extends RouteGenericInterface {
   Body: { name: string; price: string };
 }
 
+interface AccessoryFileGet extends RouteGenericInterface {
+  Params: { filename: string };
+}
+
 interface FieldValue {
   value: string;
 }
 
 export function useAccessoriesController(
   server: FastifyInstance,
-  dbConnection: Knex
+  accessoriesService: AccessoriesService
 ) {
   server.get(ACCESSORIES, async (request, reply) => {
     try {
-      const data = dbConnection("acc").select();
-      return data;
+      return accessoriesService.getAllAccessories();
     } catch {
       reply.code(500).send({ error: "Error in getting data" });
     }
   });
 
-  server.delete<AccessoryDelete>( // TODO delete files from folder
+  server.delete<AccessoryDelete>(
     ACCESSORIES,
-    {
-      preHandler: [authGuard],
-    },
+    { preHandler: [authGuard] },
     async (request, reply) => {
       try {
         const { id } = request.body;
-        const result = await dbConnection("acc").select().where("id", id);
-        const fileName = result[0].src;
-        fileName && fs.unlinkSync(`./uploads/${fileName}`);
-        return dbConnection("acc").where("id", id).del("id");
+        return accessoriesService.deleteAccessory(id);
       } catch {
         reply.code(500).send({ error: "Error in deleting data" });
       }
     }
   );
-
-  const pump = util.promisify(pipeline);
 
   server.post<AccessoryPost>(
     ACCESSORIES,
@@ -90,39 +78,19 @@ export function useAccessoriesController(
           return reply.code(400).send({ error: "No data" });
         }
 
-        const generatedData = AccessoriesRepository.createAccessory(
-          checkedName,
-          checkedPrice,
-          fileTypeMapper[fileType.value] ?? ""
+        await accessoriesService.createAccessory(
+          {
+            name: checkedName,
+            price: checkedPrice,
+          },
+          file,
+          fileType.value
         );
 
-        await pump(
-          file.file,
-          fs.createWriteStream(
-            `./uploads/${generatedData.id}${fileType && "."}${
-              fileTypeMapper[fileType.value]
-            }`
-          )
-        );
-
-        await dbConnection("acc").insert(generatedData);
         return { message: "Files and fields uploaded successfully" };
       } catch (error) {
         reply.code(500).send({ error: "An error occurred" });
       }
     }
   );
-
-  server.get(FILE, async (request, reply) => {
-    try {
-      // @ts-ignore
-      const { filename } = request.params;
-      const fileUrl = `/uploads/${filename}`;
-
-      return { fileUrl };
-    } catch (error) {
-      console.error(error);
-      reply.code(500).send("Internal Server Error");
-    }
-  });
 }
