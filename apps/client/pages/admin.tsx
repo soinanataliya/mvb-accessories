@@ -4,11 +4,11 @@ import { AccessoriesList } from "../components/admin/AccessoriesList";
 import { AddAccessory } from "../components/admin/AddAccessory";
 import { User } from "../components/admin/User";
 import { PageLayout } from "../components/shared/PageLayout";
+import { Typography } from "@mui/material";
 
 const Admin = () => {
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const componentDidMountRef = useRef(false);
-
 
   useEffect(() => {
     if (!componentDidMountRef.current) {
@@ -19,7 +19,7 @@ const Admin = () => {
       if (response?.user) {
         setCurrentUser(response.user);
       }
-    })
+    });
   }, []);
 
   const handleLogIn = (login: string) => {
@@ -35,10 +35,10 @@ const Admin = () => {
 
   return (
     <PageLayout>
-      <h1>Admin panel</h1>
+      <Typography variant="h3">Admin panel</Typography>
       <User user={currentUser} onLogin={handleLogIn} onLogout={handleLogOut} />
       <AddAccessory />
-      { !!currentUser && <AccessoriesList /> }
+      {!!currentUser && <AccessoriesList />}
     </PageLayout>
   );
 };

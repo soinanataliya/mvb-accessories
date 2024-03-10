@@ -2,6 +2,13 @@ import { memo, useState, SyntheticEvent, ChangeEvent } from "react";
 import { postNewItem } from "../../../api/requests";
 import styles from "./AddAccessory.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  Typography,
+} from "@mui/material";
 
 const AddAccessory = () => {
   const [name, setName] = useState("");
@@ -13,8 +20,8 @@ const AddAccessory = () => {
   const { mutate: create } = useMutation({
     mutationFn: postNewItem,
     onSuccess: () => {
-      client.invalidateQueries({ queryKey: ['accessories']});
-    }
+      client.invalidateQueries({ queryKey: ["accessories"] });
+    },
   });
 
   const handleChangeName = (event: SyntheticEvent) => {
@@ -46,40 +53,45 @@ const AddAccessory = () => {
       formData.append("fileType", file.type);
     }
 
-   void create(formData);
+    void create(formData);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={styles.form}
-      encType="multipart/form-data"
-    >
-      <h3>+ Add new accessory</h3>
-      <div className={styles.formBlock}>
-        <label>Name:</label>
-        <input value={name} onChange={handleChangeName}></input>
-      </div>
-      <div className={styles.formBlock}>
-        <label>Price:</label>
-        <input
-          type="text"
-          name="price"
-          value={price}
-          onChange={handleChangePrice}
-        />
-      </div>
-      <div className={styles.formBlock}>
-        <input
-          type="file"
-          id="photo"
-          name="photo"
-          accept="image/png, image/jpeg"
-          onChange={handleChangeFile}
-        />
-      </div>
-      <button type="submit">Add</button>
-    </form>
+    <Card variant="outlined" style={{ margin: "24px 0" }}>
+      <CardContent>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <Typography variant="h5" marginBottom="12px">
+            Add new accessory
+          </Typography>
+          <div className={styles.formBlock}>
+            <TextField label="Name" value={name} onChange={handleChangeName} />
+          </div>
+          <div className={styles.formBlock}>
+            <TextField
+              type="text"
+              name="price"
+              label="Price"
+              value={price}
+              onChange={handleChangePrice}
+            />
+          </div>
+          <div className={styles.formBlock}>
+            <TextField
+              type="file"
+              id="photo"
+              name="photo"
+              inputProps={{ accept: "image/png, image/jpeg" }}
+              onChange={handleChangeFile}
+            />
+          </div>
+          <div className={styles.formBlock}>
+            <Button color="primary" variant="contained" type="submit">
+              Add
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 export default memo(AddAccessory);
