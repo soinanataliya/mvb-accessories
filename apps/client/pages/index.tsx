@@ -4,7 +4,12 @@ export default function Web() {
   return (
     <>
       <h1>Client</h1>
-      <Link href="/admin">To admin</Link>
+      <div>
+        <Link href="/admin">To admin</Link>
+      </div>
+      <div>
+        <Link href="/accessories">Accessories</Link>
+      </div>
     </>
   );
 }

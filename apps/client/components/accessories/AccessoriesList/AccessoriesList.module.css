@@ -1,0 +1,6 @@
+.accessories {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 15px;
+  font-size: 1.2rem;
+}
