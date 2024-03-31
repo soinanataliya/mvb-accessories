@@ -11,17 +11,16 @@ const Accessory: FC<IProps> = ({ item }) => {
 
   return (
     <div className={styles.item}>
-      <div>
-        <img
-          src={`http://localhost:3001/uploads/${src}`}
-          alt={`${name}Accessory image`}
-          width={100}
-          height={100}
-          className={styles.img}
-        />
+      <div
+        className={styles.imageWrapper}
+        style={{
+          backgroundImage: `url(http://localhost:3001/uploads/${src})`,
+        }}
+      ></div>
+      <div className={styles.description}>
+        <p>{name}</p>
+        <p>{price}</p>
       </div>
-      <div>{name}</div>
-      <div>{price}</div>
     </div>
   );
 };

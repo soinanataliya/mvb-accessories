@@ -15,12 +15,16 @@ const AccessoriesList = () => {
   }
 
   return (
-    <div className={styles.accessories}>
-      {isSuccess &&
-        data?.map((item) => {
-          return <Accessory key={item.id} item={item} />;
-        })}
-    </div>
+    <>
+      <h3 className={styles.header}>Аксессуары</h3>
+      <div className={styles.accessories}>
+        {isLoading && <div>Loading...</div>}
+        {isSuccess &&
+          data?.map((item) => {
+            return <Accessory key={item.id} item={item} />;
+          })}
+      </div>
+    </>
   );
 };
 export default memo(AccessoriesList);

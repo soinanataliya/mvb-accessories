@@ -3,6 +3,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ErrorStub } from "../components/shared/ErrorStub";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "../styles/reset.css";
+import "../styles/global.css";
 
 const client = new QueryClient;
 

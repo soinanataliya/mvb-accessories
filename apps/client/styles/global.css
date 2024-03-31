@@ -1,0 +1,12 @@
+:root {
+  --mainColor: rgb(28, 27, 27);
+  --padding-s: 4px;
+  --padding-m: 8px;
+  --padding-l: 12px;
+  --padding-xl: 24px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}

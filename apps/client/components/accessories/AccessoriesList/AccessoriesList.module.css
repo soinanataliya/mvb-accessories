@@ -1,6 +1,12 @@
 .accessories {
   display: flex;
   flex-flow: row wrap;
-  padding: 15px;
   font-size: 1.2rem;
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: 200;
+  color: var(--primary-text);
+  padding-bottom: var(--padding-l);
 }

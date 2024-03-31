@@ -1,9 +1,13 @@
 .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   border: 1px blue solid;
-  box-sizing: border-box;
-  width: 100%;
   max-width: 33.3333%;
-  padding: 15px;
+  min-width: 350px;
+  padding: var(--padding-l);
+  color: var(--primary-text);
 
   @media (max-width: 900px) {
     max-width: 50%;
@@ -12,8 +16,20 @@
     max-width: 100%;
   }
 }
-
-.img {
+.imageWrapper {
+  margin: 0 auto;
   width: 100%;
   border-radius: 20px;
+  width: 100%;
+  height: 290px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 7%);
+}
+.description {
+  display: block;
+  width: 100%;
+  padding-top: var(--padding-l);
+  color: var(--mainColor);
 }
