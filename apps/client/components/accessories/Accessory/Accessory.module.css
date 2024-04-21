@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 1px blue solid;
   max-width: 33.3333%;
   min-width: 350px;
   padding: var(--padding-l);

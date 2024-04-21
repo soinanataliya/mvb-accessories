@@ -10,7 +10,7 @@ const client = new QueryClient;
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary fallback={<ErrorStub />}>
-      <QueryClientProvider client={client}>
+      <QueryClientProvider client={client}> 
         <Component {...pageProps} />
       </QueryClientProvider>
     </ErrorBoundary>
