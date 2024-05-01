@@ -48,9 +48,9 @@ const AddAccessory = () => {
     formData.append("name", name);
     formData.append("price", price);
     if (!!file) {
+      formData.append("fileType", file.type);
       const f = new Blob([file]);
       formData.append("file", f);
-      formData.append("fileType", file.type);
     }
 
     void create(formData);

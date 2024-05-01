@@ -4,7 +4,6 @@ import he from "he";
 import AccessoriesService from "./acessories.service.js";
 
 const ACCESSORIES = "/accessories";
-const FILE = "/file/:filename";
 
 const escapeString = (input: string): string => {
   // TODO перенести в отдельный модуль
@@ -16,10 +15,6 @@ interface AccessoryDelete extends RouteGenericInterface {
 }
 interface AccessoryPost extends RouteGenericInterface {
   Body: { name: string; price: string };
-}
-
-interface AccessoryFileGet extends RouteGenericInterface {
-  Params: { filename: string };
 }
 
 interface FieldValue {
