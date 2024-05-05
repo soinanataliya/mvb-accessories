@@ -5,6 +5,7 @@
   width: 100%;
   font-size: 2rem;
   border-bottom: 3px #fbedea solid;
+  color: #E6A9A7;
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -13,8 +14,10 @@
 }
 
 .headerImg {
-  height: 300px;
+  height: 360px;
+  width: 330px;
   @media (max-width: 900px) {
     height: 200px;
+    width: 186px;
   }
 }

@@ -1,5 +1,12 @@
 .page {
-    height: 100vh;
-    padding: 24px;
-    background-color: rgba(243, 246, 249, 0.6);
+  height: 100vh;
+  padding: 24px;
+}
+
+.light {
+  background-color: rgba(243, 246, 249, 0.6);
+}
+
+.dark {
+  background-color: red;
 }
