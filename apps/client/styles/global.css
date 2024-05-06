@@ -1,30 +1,46 @@
 :root {
-  --mainColor: rgb(28, 27, 27);
   --padding-s: 4px;
   --padding-m: 8px;
   --padding-l: 12px;
   --padding-xl: 24px;
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --backgroundColor: rgba(243, 246, 249, 0.6);
+    --mainColor: rgb(28, 27, 27);
+  }
+}
 
 @media (prefers-color-scheme: dark) {
-  .theme {
-    background: #753;
-    color: #dcb;
-    outline: 5px dashed #000;
+  :root {
+    --backgroundColor: black;
+    --mainColor: white;
   }
 }
-
-@media (prefers-color-scheme: light) {
-  .theme {
-    background: #bcd;
-    color: #334;
-    outline: 5px dotted #000;
-  }
-}
-
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+
+.dark-theme {
+  --backgroundColor: black;
+  --mainColor: white;
+}
+
+.light-theme {
+  --backgroundColor: rgba(243, 246, 249, 0.6);
+  --mainColor: rgb(28, 27, 27);;
 }

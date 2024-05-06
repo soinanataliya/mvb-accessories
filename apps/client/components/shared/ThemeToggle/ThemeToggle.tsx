@@ -1,17 +1,19 @@
 import { memo } from "react";
-import { useTheme } from "../../../themes/ThemeProvider/ThemeProvider";
 
 const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
+  const changeTheme = () => {
+    if (document.body.classList.contains("light-theme")) {
+      document.body.classList.remove("light-theme");
+      document.body.classList.add("dark-theme");
+      return;
+    }
+    document.body.classList.remove("dark-theme");
+    document.body.classList.add("light-theme");
+  };
 
   return (
     <div>
-      <button
-        style={{ backgroundColor: theme === "light" ? "red" : "blue" }}
-        onClick={toggleTheme}
-      >
-        {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
-      </button>
+      <button onClick={changeTheme}>Switch theme</button>
     </div>
   );
 };
