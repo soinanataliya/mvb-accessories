@@ -1,5 +1,9 @@
 module.exports = {
   reactStrictMode: true,
+  i18n: {
+    locales: ["ru", "am"],
+    defaultLocale: "ru",
+  },
   experimental: {
     transpilePackages: ["ui"],
   },
