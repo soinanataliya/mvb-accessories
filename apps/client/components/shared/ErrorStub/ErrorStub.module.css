@@ -1,4 +1,4 @@
-.page {
-  padding: var(--padding-xl);
+.message {
+  color: var(--primaryText);
   background-color: var(--backgroundColor);
 }

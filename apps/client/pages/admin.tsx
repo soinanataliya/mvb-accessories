@@ -35,7 +35,9 @@ const Admin = () => {
 
   return (
     <PageLayout>
-      <Typography variant="h3">Admin panel</Typography>
+      <Typography variant="h3" style={{ color: "var(--primaryText)" }}>
+        Admin panel
+      </Typography>
       <User user={currentUser} onLogin={handleLogIn} onLogout={handleLogOut} />
       <AddAccessory />
       {!!currentUser && <AccessoriesList />}

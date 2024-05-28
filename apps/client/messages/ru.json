@@ -2,6 +2,12 @@
     "AccessoriesList": {
       "title": "Аксессуары",
       "loading": "Идет загрузка..."
+    },
+    "ErrorStub": {
+      "message": "Что-то пошло не так!"
+    },
+    "ThemeToggle": {
+      "button": "Переключить тему"
     }
   }
   

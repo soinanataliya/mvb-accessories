@@ -8,14 +8,14 @@
 @media (prefers-color-scheme: light) {
   :root {
     --backgroundColor: rgba(243, 246, 249, 0.6);
-    --mainColor: rgb(28, 27, 27);
+    --primaryText: rgb(28, 27, 27);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --backgroundColor: black;
-    --mainColor: white;
+    --primaryText: white;
   }
 }
 
@@ -34,13 +34,12 @@ body {
     "Segoe UI Symbol";
 }
 
-
 .dark-theme {
   --backgroundColor: black;
-  --mainColor: white;
+  --primaryText: white;
 }
 
 .light-theme {
   --backgroundColor: rgba(243, 246, 249, 0.6);
-  --mainColor: rgb(28, 27, 27);;
+  --primaryText: rgb(28, 27, 27);
 }

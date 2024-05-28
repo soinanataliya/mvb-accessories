@@ -2,6 +2,7 @@ import { memo } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import { ThemeToggle } from "../ThemeToggle";
+import { LanguageToggle } from "../LanguageToggle";
 
 const Header = () => {
   return (
@@ -15,6 +16,7 @@ const Header = () => {
         alt="украшения ободки handmade"
       />
       <ThemeToggle />
+      <LanguageToggle />
     </div>
   );
 };

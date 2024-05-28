@@ -1,4 +1,14 @@
 import { memo } from "react";
+import { useTranslations } from "next-intl";
+
+export async function getStaticProps(props: { locale: string }) {
+  return {
+    props: {
+      messages: (await import(`../../../messages/${props.locale}.json`))
+        .default,
+    },
+  };
+}
 
 const ThemeToggle = () => {
   const changeTheme = () => {
@@ -11,9 +21,11 @@ const ThemeToggle = () => {
     document.body.classList.add("light-theme");
   };
 
+  const t = useTranslations("ThemeToggle");
+
   return (
     <div>
-      <button onClick={changeTheme}>Switch theme</button>
+      <button onClick={changeTheme}>{t("button")}</button>
     </div>
   );
 };

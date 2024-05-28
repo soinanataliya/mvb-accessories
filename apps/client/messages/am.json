@@ -2,5 +2,11 @@
   "AccessoriesList": {
     "title": "Աքսեսուարներ",
     "loading": "Բեռնվում..."
+  },
+  "ErrorStub": {
+    "message": "Ինչ որ բան այնպես չգնաց!"
+  },
+  "ThemeToggle": {
+    "button": "Փոխեք թեման"
   }
 }
