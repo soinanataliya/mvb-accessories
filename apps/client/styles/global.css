@@ -34,6 +34,16 @@ body {
     "Segoe UI Symbol";
 }
 
+a {
+  text-decoration: none;
+}
+a:link {
+  color: var(--primaryText);
+}
+a:visited {
+  color: var(--primaryText);
+}
+
 .dark-theme {
   --backgroundColor: black;
   --primaryText: white;

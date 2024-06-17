@@ -15,8 +15,12 @@ const Header = () => {
         className={styles.headerImg}
         alt="украшения ободки handmade"
       />
-      <ThemeToggle />
-      <LanguageToggle />
+      <div className={styles.theme}>
+        <ThemeToggle />
+      </div>
+      <div className={styles.language}>
+        <LanguageToggle />
+      </div>
     </div>
   );
 };

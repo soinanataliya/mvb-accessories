@@ -1,11 +1,12 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   justify-content: center;
   width: 100%;
   font-size: 2rem;
   border-bottom: 3px #fbedea solid;
-  color: #E6A9A7;
+  color: #e6a9a7;
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -19,5 +20,21 @@
   @media (max-width: 900px) {
     height: 200px;
     width: 186px;
+  }
+}
+
+.theme {
+  width: 200px;
+  @media (max-width: 900px) {
+    width: 100%;
+    align-self: center;
+  }
+}
+
+.language {
+  align-self: flex-start;
+  @media (max-width: 900px) {
+    align-self: center;
+    padding: 8px;
   }
 }
