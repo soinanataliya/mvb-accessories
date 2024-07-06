@@ -5,10 +5,14 @@ import { AddAccessory } from "../components/admin/AddAccessory";
 import { User } from "../components/admin/User";
 import { PageLayout } from "../components/shared/PageLayout";
 import { Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
 const Admin = () => {
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const componentDidMountRef = useRef(false);
+
+  const router = useRouter();
+  const { locale, locales, defaultLocale } = router;
 
   useEffect(() => {
     if (!componentDidMountRef.current) {
@@ -38,6 +42,13 @@ const Admin = () => {
       <Typography variant="h3" style={{ color: "var(--primaryText)" }}>
         Admin panel
       </Typography>
+      <p style={{ color: "var(--primaryText)" }}>Current locale: {locale}</p>
+      <p style={{ color: "var(--primaryText)" }}>
+        Default locale: {defaultLocale}
+      </p>
+      <p style={{ color: "var(--primaryText)" }}>
+        Configured locales: {JSON.stringify(locales)}
+      </p>
       <User user={currentUser} onLogin={handleLogIn} onLogout={handleLogOut} />
       <AddAccessory />
       {!!currentUser && <AccessoriesList />}

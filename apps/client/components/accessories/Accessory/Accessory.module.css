@@ -1,25 +1,16 @@
 .item {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  max-width: 33.3333%;
-  min-width: 350px;
-  padding: var(--padding-l);
+  height: 350px;
   color: var(--primaryText);
-
-  @media (max-width: 900px) {
-    max-width: 50%;
-  }
-  @media (max-width: 500px) {
-    max-width: 100%;
-  }
 }
 .imageWrapper {
   margin: 0 auto;
-  width: 100%;
   border-radius: 20px;
-  width: 100%;
+  width: 350px;
   height: 290px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +19,7 @@
 }
 .description {
   display: block;
-  width: 100%;
+  width: 350px;
   padding-top: var(--padding-l);
   color: var(--primaryText);
 }

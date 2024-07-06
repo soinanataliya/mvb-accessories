@@ -1,4 +1,7 @@
 .page {
-  padding: var(--padding-xl);
   background-color: var(--backgroundColor);
+}
+
+.content {
+  padding: var(--padding-xl);
 }

@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --backgroundColor: black;
-    --primaryText: white;
+    --backgroundColor: rgb(32 31 33);
+    --primaryText: rgb(244 244 244);
   }
 }
 
@@ -42,14 +42,4 @@ a:link {
 }
 a:visited {
   color: var(--primaryText);
-}
-
-.dark-theme {
-  --backgroundColor: black;
-  --primaryText: white;
-}
-
-.light-theme {
-  --backgroundColor: rgba(243, 246, 249, 0.6);
-  --primaryText: rgb(28, 27, 27);
 }

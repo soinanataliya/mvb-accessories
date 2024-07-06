@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { AccessoriesList } from "../components/accessories/AccessoriesList";
 import { PageLayout } from "../components/shared/PageLayout";
 
@@ -11,18 +10,8 @@ export async function getStaticProps(props: { locale: string }) {
 }
 
 const Accessories = () => {
-  const router = useRouter();
-  const { locale, locales, defaultLocale } = router;
-
   return (
     <PageLayout>
-      <p style={{ color: "var(--primaryText)" }}>Current locale: {locale}</p>
-      <p style={{ color: "var(--primaryText)" }}>
-        Default locale: {defaultLocale}
-      </p>
-      <p style={{ color: "var(--primaryText)" }}>
-        Configured locales: {JSON.stringify(locales)}
-      </p>
       <AccessoriesList />
     </PageLayout>
   );

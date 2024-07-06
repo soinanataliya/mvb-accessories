@@ -1,7 +1,6 @@
 import { memo } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
-import { ThemeToggle } from "../ThemeToggle";
 import { LanguageToggle } from "../LanguageToggle";
 
 const Header = () => {
@@ -15,9 +14,6 @@ const Header = () => {
         className={styles.headerImg}
         alt="украшения ободки handmade"
       />
-      <div className={styles.theme}>
-        <ThemeToggle />
-      </div>
       <div className={styles.language}>
         <LanguageToggle />
       </div>

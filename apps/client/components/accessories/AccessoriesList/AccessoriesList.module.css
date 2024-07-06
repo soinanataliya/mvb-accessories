@@ -1,12 +1,23 @@
 .accessories {
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  width: 100%;
+  max-width: 1700px;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  gap: 12px;
   font-size: 1.2rem;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 720px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .header {
   font-size: 3rem;
   font-weight: 200;
   color: var(--primaryText);
-  padding-bottom: var(--padding-l);
+  padding-bottom: var(--padding-xl);
 }
