@@ -8,6 +8,9 @@ import path from 'node:path';
 import { fileURLToPath } from "node:url";
 import AccessoriesRepository from "./modules/accessories/acessories.repository.js";
 import AccessoriesService from "./modules/accessories/acessories.service.js";
+import CategoriesRepository from "./modules/categories/categories.repository.js";
+import CategoriesService from "./modules/categories/categories.service.js";
+import { useCategoriesController } from "./modules/categories/categories.controller.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +29,11 @@ export default function build(opts: any) {
   const accessoriesRepository = new AccessoriesRepository(dbConnection);
   const accessoriesService = new AccessoriesService(accessoriesRepository);
 
+  const categoriesRepository = new CategoriesRepository(dbConnection);
+  const categoriesService = new CategoriesService(categoriesRepository);
+
   useAccessoriesController(server, accessoriesService);
+  useCategoriesController(server, categoriesService);
 
   useAuthController(server);
   return server;

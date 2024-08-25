@@ -1,12 +1,12 @@
 import { memo } from "react";
 import { Accessory } from "../Accessory";
 import { useQuery } from "@tanstack/react-query";
-import { getItems } from "../../../api/requests";
+import { getAccessories } from "../../../api/requests";
 import { Typography, Card, CardContent } from "@mui/material";
 
 const AccessoriesList = () => {
   const { data, isLoading, isSuccess } = useQuery({
-    queryFn: getItems,
+    queryFn: getAccessories,
     queryKey: ["accessories"],
   });
 

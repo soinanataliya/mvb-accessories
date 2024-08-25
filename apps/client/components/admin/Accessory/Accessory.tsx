@@ -1,5 +1,5 @@
 import { memo, FC } from "react";
-import { deleteItem } from "../../../api/requests";
+import { deleteAccesory } from "../../../api/requests";
 import { IAccessory } from "../../../types/types";
 import styles from "./Accessory.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -15,7 +15,7 @@ const Accessory: FC<IProps> = ({ item }) => {
   const client = useQueryClient();
 
   const { mutate: create } = useMutation({
-    mutationFn: deleteItem,
+    mutationFn: deleteAccesory,
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["accessories"] });
     },

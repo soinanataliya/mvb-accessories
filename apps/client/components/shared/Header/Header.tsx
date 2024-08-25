@@ -5,7 +5,7 @@ import { LanguageToggle } from "../LanguageToggle";
 
 const Header = () => {
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       MVB ACCESSORIES
       <Image
         height={360}
@@ -17,7 +17,7 @@ const Header = () => {
       <div className={styles.language}>
         <LanguageToggle />
       </div>
-    </div>
+    </header>
   );
 };
 export default memo(Header);

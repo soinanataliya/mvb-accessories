@@ -1,5 +1,5 @@
-import { memo, useState, SyntheticEvent, ChangeEvent } from "react";
-import { postNewItem } from "../../../api/requests";
+import { memo, useState, SyntheticEvent, ChangeEvent, ReactNode } from "react";
+import { postNewAccessory } from "../../../api/requests";
 import styles from "./AddAccessory.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -8,17 +8,25 @@ import {
   Card,
   CardContent,
   Typography,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from "@mui/material";
 
-const AddAccessory = () => {
+interface IProps {
+  categories?: { id: string; name: string }[];
+}
+
+const AddAccessory = ({ categories = [] }: IProps) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [itemCategories, setItemCategories] = useState<any>([]); // TODO
   const [file, setFile] = useState<File | null>(null);
 
   const client = useQueryClient();
 
   const { mutate: create } = useMutation({
-    mutationFn: postNewItem,
+    mutationFn: postNewAccessory,
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["accessories"] });
     },
@@ -32,6 +40,11 @@ const AddAccessory = () => {
   const handleChangePrice = (event: SyntheticEvent) => {
     const target = event.target as HTMLInputElement;
     setPrice(target.value);
+  };
+
+  const handleChangeCategory = (event: SelectChangeEvent<string[]>) => {
+    const value = event.target.value;
+    setItemCategories(value);
   };
 
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +96,26 @@ const AddAccessory = () => {
               inputProps={{ accept: "image/png, image/jpeg" }}
               onChange={handleChangeFile}
             />
+          </div>
+          <div className={styles.formBlock}>
+            <Select
+              multiple
+              type="text"
+              id="category"
+              name="category"
+              label="Category"
+              value={itemCategories}
+              style={{ width: 195 }}
+              onChange={(event) => handleChangeCategory(event)}
+            >
+              {categories.map((category) => {
+                return (
+                  <MenuItem key={category.id} value={category.id}>
+                    {category.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
           </div>
           <div className={styles.formBlock}>
             <Button color="primary" variant="contained" type="submit">
