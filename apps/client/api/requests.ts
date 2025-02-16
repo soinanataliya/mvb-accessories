@@ -98,6 +98,23 @@ export const postNewCategory = async (name: { name: string }) => {
   }
 };
 
+export const deleteCategory = async (id: string) => {
+  try {
+    await fetch(CATEGORIES, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    });
+    showSuccess("Successfully deleted");
+  } catch (error) {
+    showError();
+  }
+};
+
 export const loginRequest = async ({
   login,
   password,

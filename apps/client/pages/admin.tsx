@@ -61,8 +61,8 @@ const Admin = () => {
       {!!currentUser && (
         <>
           <AddAccessory categories={categories} />
-          <AddCategory />
           <AccessoriesList />
+          <AddCategory />
           <CategoriesList categories={categories} isLoading={isLoading} isSuccess={isSuccess} />
         </>
       )}

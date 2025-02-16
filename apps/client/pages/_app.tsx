@@ -17,6 +17,7 @@ export default function MvbAccessories({ Component, pageProps }: AppProps) {
       <NextIntlClientProvider
         locale={router.locale}
         messages={pageProps.messages}
+        timeZone='Europe/Moscow'
       >
         <QueryClientProvider client={client}>
           <Component {...pageProps} />

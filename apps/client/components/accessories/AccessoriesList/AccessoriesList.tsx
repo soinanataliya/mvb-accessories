@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Accessory } from "../Accessory";
 import { useQuery } from "@tanstack/react-query";
-import { getItems } from "../../../api/requests";
+import { getAccessories } from "../../../api/requests";
 import { useTranslations } from "next-intl";
 
 import styles from "./AccessoriesList.module.css";
@@ -19,7 +19,7 @@ const AccessoriesList = () => {
   const t = useTranslations("AccessoriesList");
 
   const { data, isLoading, isSuccess } = useQuery({
-    queryFn: getItems,
+    queryFn: getAccessories,
     queryKey: ["accessories"],
   });
 

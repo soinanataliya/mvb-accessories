@@ -10,12 +10,18 @@
     --backgroundColor: rgba(243, 246, 249, 0.6);
     --primaryText: rgb(28, 27, 27);
   }
+  body {
+    background-color: var(--backgroundColor);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --backgroundColor: rgb(32 31 33);
     --primaryText: rgb(244 244 244);
+  }
+  body {
+    background-color: var(--backgroundColor);
   }
 }
 
@@ -32,6 +38,7 @@ body {
     "Apple Color Emoji",
     "Segoe UI Emoji",
     "Segoe UI Symbol";
+
 }
 
 a {
