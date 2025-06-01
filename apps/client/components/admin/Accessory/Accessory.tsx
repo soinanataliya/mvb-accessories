@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const Accessory: FC<IProps> = ({ item }) => {
-  const { id, name, price, src } = item;
+  const { id, name, price, src, category } = item;
 
   const client = useQueryClient();
 
@@ -31,6 +31,7 @@ const Accessory: FC<IProps> = ({ item }) => {
       <div>Name: {name}</div>
       <div>Price: {price}</div>
       <div>Src: {src}</div>
+      <div>Category: {category}</div>
       <div>
         <img
           src={`http://localhost:3001/uploads/${src}`}

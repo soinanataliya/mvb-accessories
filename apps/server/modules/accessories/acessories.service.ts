@@ -18,17 +18,18 @@ export default class AccessoriesService {
     }
 
     async createAccessory(
-        accessoryData: { name: string; price: string },
+        accessoryData: { name: string; price: string, category: string },
         file: MultipartFile,
         fileTypeValue: string,
     ) {
         const id = uuidv4();
-        const { name, price } = accessoryData;
+        const { name, price, category } = accessoryData;
         const ext = EXTENTION_BY_FILE_TYPE[fileTypeValue] ?? "";
         const newAccessory = {
             id,
             name,
             price,
+            category,
             src: `${id}.${ext}`,
         };
 

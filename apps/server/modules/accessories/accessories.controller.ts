@@ -14,7 +14,7 @@ interface AccessoryDelete extends RouteGenericInterface {
   Body: { id: string };
 }
 interface AccessoryPost extends RouteGenericInterface {
-  Body: { name: string; price: string };
+  Body: { name: string; price: string, category?: string };
 }
 
 interface FieldValue {
@@ -64,10 +64,12 @@ export function useAccessoriesController(
 
         const name = file.fields.name as FieldValue;
         const price = file.fields.price as FieldValue;
+        const category = file.fields.category as FieldValue;
         const fileType = file.fields.fileType as FieldValue;
 
         const checkedName = escapeString(name.value);
         const checkedPrice = escapeString(price.value);
+        const checkedCategory = escapeString(category.value);
 
         if (!name.value || !price.value) {
           return reply.code(400).send({ error: "No data" });
@@ -77,6 +79,7 @@ export function useAccessoriesController(
           {
             name: checkedName,
             price: checkedPrice,
+            category: checkedCategory,
           },
           file,
           fileType.value

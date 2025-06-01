@@ -3,4 +3,5 @@ export interface IAccessory {
   name: string;
   price?: string;
   src?: string;
+  category?: string;
 }

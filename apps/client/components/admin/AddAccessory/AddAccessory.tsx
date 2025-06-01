@@ -20,7 +20,7 @@ interface IProps {
 const AddAccessory = ({ categories = [] }: IProps) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [itemCategories, setItemCategories] = useState<any>([]); // TODO
+  const [itemCategories, setItemCategories] = useState<string[]>([]);
   const [file, setFile] = useState<File | null>(null);
 
   const client = useQueryClient();
@@ -44,7 +44,7 @@ const AddAccessory = ({ categories = [] }: IProps) => {
 
   const handleChangeCategory = (event: SelectChangeEvent<string[]>) => {
     const value = event.target.value;
-    setItemCategories(value);
+    setItemCategories(value as string[]); // TODO
   };
 
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +60,8 @@ const AddAccessory = ({ categories = [] }: IProps) => {
 
     formData.append("name", name);
     formData.append("price", price);
+    console.log("itemCategories", itemCategories);
+    formData.append("category", itemCategories.join(","));
     if (!!file) {
       formData.append("fileType", file.type);
       const f = new Blob([file]);
@@ -99,7 +101,7 @@ const AddAccessory = ({ categories = [] }: IProps) => {
           </div>
           <div className={styles.formBlock}>
             <Select
-              multiple
+              // multiple
               type="text"
               id="category"
               name="category"
@@ -110,7 +112,7 @@ const AddAccessory = ({ categories = [] }: IProps) => {
             >
               {categories.map((category) => {
                 return (
-                  <MenuItem key={category.id} value={category.id}>
+                  <MenuItem key={category.id} value={category.name}>
                     {category.name}
                   </MenuItem>
                 );

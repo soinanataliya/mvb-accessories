@@ -5,6 +5,7 @@ export interface Accessory {
   name?: string;
   price?: string;
   src?: string;
+  category?: string;
 }
 
 export default class AccessoriesRepository {
