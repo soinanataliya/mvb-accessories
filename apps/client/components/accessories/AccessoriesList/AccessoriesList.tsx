@@ -3,9 +3,9 @@ import { Accessory } from "../Accessory";
 import { useQuery } from "@tanstack/react-query";
 import { getAccessories, getCategories } from "../../../api/requests";
 import { useTranslations } from "next-intl";
-import { Select, MenuItem } from "@mui/material";
 
 import styles from "./AccessoriesList.module.css";
+import CustomSelect from "../../shared/CustomSelect/CustomSelect";
 
 export async function getStaticProps(props: { locale: string }) {
   return {
@@ -33,14 +33,16 @@ const AccessoriesList = () => {
     queryKey: ["categories"],
   });
 
-  const [filter, setFilter] = useState<string | null>(null);
+  const [filter, setFilter] = useState<string[]>([]);
 
   const loadingData = isLoading || isLoadingCategories;
   const showData = isSuccess && isSuccessCategories;
 
   const filteredData = useMemo(() => {
-    if (!!filter) {
-      return data?.filter((item) => item.category === filter);
+    if (!!filter?.length) {
+      return data?.filter((item) =>
+        filter.find((filter) => filter === item.category)
+      );
     }
     return data;
   }, [data, filter]);
@@ -51,25 +53,14 @@ const AccessoriesList = () => {
         {t("title")}
         {showData && (
           <>
-            <Select
-              type="text"
-              id="category"
+            <CustomSelect
               name="category"
-              label="Category"
               value={filter}
-              style={{ width: 195, backgroundColor: "white" }} // TODO
-              onChange={(event) => setFilter(event.target.value)}
-            >
-              {categories.map((category, index) => {
-                return (
-                  <MenuItem key={category.id} value={category.name}>
-                    {category.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
+              options={categories}
+              onChange={(event) => setFilter(event.target.value as string[])}
+            />
             {!!filter && (
-              <button onClick={() => setFilter(null)}>Remove filter</button>
+              <button onClick={() => setFilter([])}>Remove filter</button>
             )}
           </>
         )}
@@ -80,6 +71,9 @@ const AccessoriesList = () => {
           filteredData?.map((item) => {
             return <Accessory key={item.id} item={item} />;
           })}
+        {showData && !filteredData?.length && (
+          <p className={styles.noData}>{t("noData")}</p>
+        )}
       </div>
     </>
   );

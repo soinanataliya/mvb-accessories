@@ -1,13 +1,13 @@
 {
-    "AccessoriesList": {
-      "title": "Аксессуары",
-      "loading": "Идет загрузка..."
-    },
-    "ErrorStub": {
-      "message": "Что-то пошло не так!"
-    },
-    "ThemeToggle": {
-      "button": "Переключить тему"
-    }
+  "AccessoriesList": {
+    "title": "Аксессуары",
+    "loading": "Идет загрузка...",
+    "noData": "Ничего не найдено, уточните критерии поиска"
+  },
+  "ErrorStub": {
+    "message": "Что-то пошло не так!"
+  },
+  "ThemeToggle": {
+    "button": "Переключить тему"
   }
-  
+}

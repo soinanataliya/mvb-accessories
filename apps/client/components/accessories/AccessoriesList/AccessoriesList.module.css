@@ -21,3 +21,8 @@
   color: var(--primaryText);
   padding-bottom: var(--padding-xl);
 }
+
+.noData {
+  font-size: 1rem;
+  color: var(--primaryText);
+}
